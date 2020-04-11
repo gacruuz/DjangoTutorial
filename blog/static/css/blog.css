@@ -1,5 +1,5 @@
 body {
-    padding-left: 15px;
+    padding-left: 0px;
 }
 
 h1 a, h2 a {
@@ -10,7 +10,7 @@ h1 a, h2 a {
 .page-header {
     background-color: #C25100;
     margin-top: 0;
-    padding: 200px 20px 20px 40px;
+    padding: 20px 20px 20px 40px;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
