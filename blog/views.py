@@ -66,7 +66,8 @@ def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
     return redirect('post_list')
-
+    
+@login_required
 def post_like(request, pk):
     post_like, created = PostLike.objects.get_or_create(
             post_id=pk,
