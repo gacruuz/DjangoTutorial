@@ -14,7 +14,19 @@
         <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
             {% endif %}
         <h2>{{ post.title }}</h2>
-        <p>{{ post.text|linebreaksbr }}</p>
+        <div class="row">
+        <div class="col">
+            <p>{{ post.text|linebreaksbr }}</p>
+            <div class="date">
+                <a href="{% url 'post_like' pk=post.pk %}">
+                <span class="glyphicon glyphicon-heart liked"></span>
+                </a> 
+                {{ post.likes_count}}
+            </div>
+            
+        </div>
+        
+    </div>
     </div>
     <hr>
     <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
@@ -36,5 +48,6 @@
     {% empty %}
         <p>No comments here yet :(</p>
     {% endfor %}
+
 
 {% endblock %}
