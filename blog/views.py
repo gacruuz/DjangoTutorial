@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Post, Comment, PostLike
+from .models import Post, Comment, PostLike, PostDisLike
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 from django.shortcuts import redirect
@@ -66,7 +66,7 @@ def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
     return redirect('post_list')
-    
+
 @login_required
 def post_like(request, pk):
     post_like, created = PostLike.objects.get_or_create(
@@ -76,6 +76,17 @@ def post_like(request, pk):
         )
 
     return redirect('post_detail', pk=pk)
+    
+@login_required
+def post_dislike(request, pk):
+    post_dislike, created = PostDisLike.objects.get_or_create(
+        post_id=pk,
+        user=request.user
+
+        )
+
+    return redirect('post_detail', pk=pk)
+
 
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)

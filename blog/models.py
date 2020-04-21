@@ -11,6 +11,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     likes = models.BigIntegerField(default=0)
+    dislikes = models.BigIntegerField(default=0)
 
     def publish(self):
         self.published_date = timezone.now()
@@ -22,10 +23,21 @@ class Post(models.Model):
     def likes_count(self):
         return PostLike.objects.filter(post=self).count()
 
+    def dislikes_count(self):
+        return PostDisLike.objects.filter(post=self).count()
+
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
 
 class PostLike(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey('blog.Post', on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return '{} - {}'.format(self.post.title, self.user)
+
+class PostDisLike(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey('blog.Post', on_delete=models.CASCADE)
 

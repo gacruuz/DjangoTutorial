@@ -19,10 +19,17 @@
             <p>{{ post.text|linebreaksbr }}</p>
             <div class="date">
                 <a href="{% url 'post_like' pk=post.pk %}">
-                <span class="glyphicon glyphicon-heart liked"></span>
+                <span class="glyphicon glyphicon-thumbs-up liked"></span>
                 </a> 
                 {{ post.likes_count}}
+
+                <a href="{% url 'post_dislike' pk=post.pk %}">
+                <span class="glyphicon glyphicon-thumbs-down liked"></span>
+                </a>
+                {{ post.dislikes_count}}
+                 
             </div>
+
             
         </div>
         
